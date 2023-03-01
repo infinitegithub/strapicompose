@@ -3,10 +3,10 @@ services:
   strapi:
     image: strapi/strapi
     environment:
-      DATABASE_CLIENT: mongo
+      DATABASE_CLIENT: postgres
       DATABASE_NAME: strapi
-      DATABASE_HOST: mongo
-      DATABASE_PORT: 27017
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
       DATABASE_USERNAME: strapi
       DATABASE_PASSWORD: strapi
     volumes:
@@ -14,13 +14,13 @@ services:
     ports:
       - '1337:1337'
     depends_on:
-      - mongo
+      - postgres
 
-  mongo:
-    image: mongo
+  postgres:
+    image: postgres
     environment:
-      MONGO_INITDB_DATABASE: strapi
-      MONGO_INITDB_ROOT_USERNAME: strapi
-      MONGO_INITDB_ROOT_PASSWORD: strapi
+      POSTGRES_DB: strapi
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: strapi
     volumes:
-      - ./data:/data/db
+      - ./data:/var/lib/postgresql/data
